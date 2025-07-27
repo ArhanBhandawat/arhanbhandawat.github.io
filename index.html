@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arhan's Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      background-color: #000;
+      color: #00ff00;
+      font-family: monospace;
+      font-size: 16px;
+    }
+
+    #terminal {
+      white-space: pre-wrap;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    input {
+      background: none;
+      border: none;
+      color: #00ff00;
+      font: inherit;
+      width: 90%;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal"></div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+
+    const commands = {
+      help: `Available commands:
+  about         Who am I?
+  education     Show education history
+  experience    Show work experience
+  skills        Technical skills & tools
+  projects      Highlighted projects
+  awards        Honors & awards
+  contact       Email / GitHub / LinkedIn
+  clear         Clear the screen
+  help          Show this help message`,
+
+      about: `👋 Hi, I'm Arhan Bhandawat — a Software Engineer passionate about distributed systems, backend architecture, and developer tooling.
+I build robust frameworks, CLI tools, and service-oriented platforms that scale.`,
+
+      education: `🎓 Education:
+1. B.Tech, ECE with Minor in CS — BIT Mesra (2019–2023) | CGPA: 8.93
+   - Specialization: Machine Learning, Systems, Software Engg., Cloud
+2. St. Anselm’s Pink City School (2018–2019) | 92.8%
+   - PCM with Java; 94% in best 4 subjects.`,
+
+      experience: `💼 Experience:
+1. Software Engineer — Nokia R&D (Aug 2023 – Nov 2024)
+   - Built a database-backed file system with Kafka-based notifications.
+   - Created a centralized CLI with UNIX-like conventions & performance optimizations.
+   - Developed modular SOA communication frameworks.
+   - Implemented network latency detection using interceptors and Prometheus.
+
+2. Intern — Nokia R&D (Jan 2023 – Jul 2023)
+   - POC for RBAC in Linux using Shellinabox.
+   - Dependency matrix tool for monolith-to-microservices transition.
+   - Gradle project templates using Python + Jinja.`,
+
+      skills: `🛠 Skills:
+Languages: Java, Python, Shell, SQL, NoSQL
+Frameworks: Spring Boot, J2EE, OSGi, SOA
+DevOps/Tools: Docker, Kubernetes, Jenkins, Git, OpenShift, Gradle
+Others: Kafka, MongoDB, Prometheus, Swagger, Aerospike
+Soft Skills: System Design, Team Collaboration, Problem Solving`,
+
+      projects: `📁 Projects:
+1. Modular Executor-Service Scaling Framework (2024)
+   - Java + Spring | Auto-adjusts thread pool size based on CPU/memory/disk.
+   - Real-time adaptive scaling for high system utilization.
+
+2. CRM Software — Loyalty Program (2020–21)
+   - Python | QR-based product authentication with rewards.
+   - Heatmaps for behavior insights; data-driven marketing support.`,
+
+      awards: `🏅 Honors & Awards:
+- 2023: Academic Recognition, BIT Mesra
+- 2022: Winner, IETE Tech Competition
+- 2021: Finalist, NEI Idea Factory
+- 2021: Winner, Ideate Quiz, BIT Mesra
+- 2019: Runner-up, Freshers Innovate (Waste Management Pitch)`,
+
+      contact: `📬 Contact:
+Email: arhanbhandawat66@gmail.com
+GitHub: https://github.com/ArhanBhandawat
+LinkedIn: https://www.linkedin.com/in/arhanbhandawat`,
+
+      clear: ''
+    };
+
+    function createPrompt() {
+      const prompt = document.createElement('div');
+      prompt.innerHTML = `<span>$ </span>`;
+      const input = document.createElement('input');
+      prompt.appendChild(input);
+      terminal.appendChild(prompt);
+      input.focus();
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const cmd = input.value.trim().toLowerCase();
+          const output = document.createElement('div');
+          output.style.marginLeft = '2ch';
+
+          if (cmd === 'clear') {
+            terminal.innerHTML = '';
+            showBanner();
+            return;
+          }
+
+          output.textContent = commands[cmd] || `command not found: ${cmd}`;
+          terminal.appendChild(document.createElement('br'));
+          terminal.appendChild(output);
+          terminal.appendChild(document.createElement('br'));
+          prompt.remove();
+          createPrompt();
+          terminal.scrollTop = terminal.scrollHeight;
+        }
+      });
+    }
+
+    function showBanner() {
+  const banner = `
+ ________  ________  ________  _________  ________ ________  ___       ___  ________     
+|\\   __  \\|\\   __  \\|\\   __  \\|\\___   ___\\\\  _____\\\\   __  \\|\\  \\     |\\  \\|\\   __  \\    
+\\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\|\\  \\|___ \\  \\_\\ \\  \\__/\\ \\  \\|\\  \\ \\  \\    \\ \\  \\ \\  \\|\\  \\   
+ \\ \\   ____\\ \\  \\\\\\  \\ \\   _  _\\   \\ \\  \\ \\ \\   __\\\\ \\  \\\\\\  \\ \\  \\    \\ \\  \\ \\  \\\\\\  \\  
+  \\ \\  \\___|\\ \\  \\\\\\  \\ \\  \\\\  \\|   \\ \\  \\ \\ \\  \\_| \\ \\  \\\\\\  \\ \\  \\____\\ \\  \\ \\  \\\\\\  \\ 
+   \\ \\__\\    \\ \\_______\\ \\__\\\\ _\\    \\ \\__\\ \\ \\__\\   \\ \\_______\\ \\_______\\ \\__\\ \\_______\\
+    \\|__|     \\|_______|\\|__|\\|__|    \\|__|  \\|__|    \\|_______|\\|_______|\\|__|\\|_______|
+                                                                                         
+
+                                     Arhan's Portfolio
+----------------------------------------------------------------------------------------
+Type 'help' to get started.
+`;
+      const bannerDiv = document.createElement('div');
+      bannerDiv.textContent = banner;
+      terminal.appendChild(bannerDiv);
+      createPrompt();
+    }
+
+    window.onload = () => {
+      showBanner();
+    };
+  </script>
+</body>
+</html>
