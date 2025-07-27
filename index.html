@@ -131,7 +131,7 @@ LinkedIn: https://www.linkedin.com/in/arhanbhandawat`,
       });
     }
 
-    function showBanner() {
+function showBanner() {
   const banner = `
  ________  ________  ________  _________  ________ ________  ___       ___  ________     
 |\\   __  \\|\\   __  \\|\\   __  \\|\\___   ___\\\\  _____\\\\   __  \\|\\  \\     |\\  \\|\\   __  \\    
@@ -140,12 +140,10 @@ LinkedIn: https://www.linkedin.com/in/arhanbhandawat`,
   \\ \\  \\___|\\ \\  \\\\\\  \\ \\  \\\\  \\|   \\ \\  \\ \\ \\  \\_| \\ \\  \\\\\\  \\ \\  \\____\\ \\  \\ \\  \\\\\\  \\ 
    \\ \\__\\    \\ \\_______\\ \\__\\\\ _\\    \\ \\__\\ \\ \\__\\   \\ \\_______\\ \\_______\\ \\__\\ \\_______\\
     \\|__|     \\|_______|\\|__|\\|__|    \\|__|  \\|__|    \\|_______|\\|_______|\\|__|\\|_______|
-                                                                                         
 
-                                     Arhan's Portfolio
-----------------------------------------------------------------------------------------
 `;
-const welcomeMessage = `
+
+  const welcomeMessage = `
 Welcome to Arhan Bhandawat's Terminal Portfolio 💻
 
 I'm a Software Engineer with experience in backend systems, distributed architectures, and developer tooling.
@@ -166,11 +164,13 @@ Available commands:
 
 ----------------------------------------------------------------------------------------
 `;
-      const bannerDiv = document.createElement('div');
-      bannerDiv.textContent =  banner + welcomeMessage;;
-      terminal.appendChild(bannerDiv);
-      createPrompt();
-    }
+
+  const bannerDiv = document.createElement('div');
+  bannerDiv.textContent = banner + welcomeMessage;
+  terminal.appendChild(bannerDiv);
+  createPrompt();
+}
+
 
     window.onload = () => {
       showBanner();
